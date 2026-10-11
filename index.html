@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jelajah Majalengka — Temukan Cerita di Setiap Perjalanan</title>
+  <!-- Bootstrap 5 + Icons + Font lewat CDN (butuh internet) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- CSS kita (path sesuai folder assets/css) -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- A. NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="#beranda"><i class="bi bi-tree-fill"></i> Jelajah Majalengka</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Buka menu"><i class="bi bi-list"></i></button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link" href="#destinasi">Destinasi</a></li>
+        <li class="nav-item"><a class="nav-link" href="#paket">Paket Wisata</a></li>
+        <li class="nav-item"><a class="nav-link" href="#pemesanan">Pemesanan</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tentang">Tentang Kami</a></li>
+        <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- B. HERO -->
+<header id="beranda" class="hero d-flex align-items-center">
+  <div class="container text-center text-white">
+    <p class="hero-tag">Kabupaten Majalengka, Jawa Barat</p>
+    <h1>Jelajahi Keindahan Alam Majalengka</h1>
+    <p class="lead mx-auto">Temukan destinasi tersembunyi, nikmati pesona alam, dan ciptakan cerita perjalananmu bersama Jelajah Majalengka.</p>
+    <a href="#destinasi" class="btn btn-leaf btn-lg me-2 mb-2">Jelajahi Destinasi</a>
+    <a href="#paket" class="btn btn-outline-light btn-lg mb-2">Lihat Paket Wisata</a>
+  </div>
+</header>
+
+<!-- D. DESTINASI (kartu dibuat otomatis oleh script.js) -->
+<section id="destinasi" class="py-5">
+  <div class="container">
+    <h2 class="section-title">Destinasi Wisata</h2>
+    <p class="section-sub">Empat pesona alam pilihan di Majalengka.</p>
+    <div class="row g-4" id="destList"></div>
+  </div>
+</section>
+
+
+<!-- PAKET WISATA -->
+<section id="paket" class="py-5">
+  <div class="container">
+    <h2 class="section-title">Paket Wisata</h2>
+    <p class="section-sub">Harga bersifat simulasi.</p>
+    <div class="row g-4" id="packageList"></div>
+  </div>
+</section>
+
+<!-- PEMESANAN -->
+<section id="pemesanan" class="py-5 pesan">
+  <div class="container text-center about">
+    <h2 class="section-title">Pemesanan</h2>
+    <p class="section-sub">Pilih paket favoritmu lalu isi formulir.</p>
+    <button class="btn btn-light btn-lg rounded-pill" onclick="openBooking()"><i class="bi bi-calendar-check"></i> Isi Formulir Pemesanan</button>
+  </div>
+</section>
+
+<!-- TENTANG KAMI -->
+<section id="tentang" class="py-5">
+  <div class="container text-center about">
+    <h2 class="section-title">Tentang Kami</h2>
+    <p>Jelajah Majalengka adalah konsep website promosi wisata lokal untuk memperkenalkan destinasi alam Majalengka dan membantu pengunjung mengenal pilihan perjalanan wisata.</p>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak" class="py-5 bg-cream">
+  <div class="container text-center about">
+    <h2 class="section-title">Kontak</h2>
+    <p>Bisa hubungi kami di Instagram, Tiktok dan Whatsapp. <a href="#pemesanan">Pemesanan</a> atau pilih salah satu paket di <a href="#paket">Paket Wisata</a>.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-4 text-center text-white">
+  <p class="mb-1"><a href="#beranda">Beranda</a> · <a href="#destinasi">Destinasi</a>  · <a href="#paket">Paket</a> · <a href="#pemesanan">Pemesanan</a></p>
+  <small>© 2026 Jelajah Majalengka — dibuat sebagai proyek untuk tugas mata kuliah Pengembangan Aplikasi Berbasis Web.</small>
+</footer>
+
+<!-- MODAL DETAIL (dipakai destinasi & paket; isi diisi lewat JavaScript) -->
+<div class="modal fade" id="infoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title" id="infoTitle"></h5><button class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
+      <div class="modal-body" id="infoBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        <button class="btn btn-leaf d-none" id="chooseBtn">Pilih Paket</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FORMULIR PEMESANAN SIMULASI -->
+<div class="modal fade" id="bookModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Formulir Pilih Paket (Simulasi)</h5><button class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button></div>
+      <div class="modal-body">
+        <form id="bookForm" novalidate>
+          <div class="mb-3"><label class="form-label" for="fName">Nama</label><input class="form-control" id="fName" required minlength="3"><div class="invalid-feedback">Isi nama minimal 3 huruf.</div></div>
+          <div class="mb-3"><label class="form-label" for="fPhone">Nomor Kontak</label><input class="form-control" id="fPhone" inputmode="numeric" pattern="[0-9]{9,14}" required><div class="invalid-feedback">Isi angka saja, 9–14 digit.</div></div>
+          <div class="mb-3"><label class="form-label" for="fPeople">Jumlah Peserta</label><input type="number" class="form-control" id="fPeople" min="1" max="30" required><div class="invalid-feedback">Isi 1–30 peserta.</div></div>
+          <div class="mb-3"><label class="form-label" for="fDate">Tanggal Perjalanan</label><input type="date" class="form-control" id="fDate" required><div class="invalid-feedback">Pilih tanggal hari ini atau sesudahnya.</div></div>
+          <div class="mb-3"><label class="form-label" for="fPackage">Paket yang Dipilih</label><select class="form-select" id="fPackage" required></select></div>
+          <button class="btn btn-leaf w-100" type="submit">Kirim</button>
+        </form>
+        <div id="bookResult" class="alert alert-success mt-3 d-none"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript kita (path sesuai folder assets/js) -->
+<script src="assets/js/script.js"></script>
+</body>
+</html>
